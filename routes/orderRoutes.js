@@ -3,13 +3,14 @@ const Order = require("../models/Order");
 const User = require("../models/User");
 router.post("/", async (req, res) => {
   const io = req.app.get("socketio");
-  const { userId, cart, country, address } = req.body;
+  const { userId, cart, country, phonenumber, address } = req.body;
   try {
     const user = await User.findById(userId);
     const order = await Order.create({
       owner: user._id,
       products: cart,
       country,
+      phonenumber,
       address,
     });
     order.count = cart.count;

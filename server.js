@@ -9,6 +9,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: "https://foodkart-app.netlify.app/",
+  // cors: "http://localhost:3000/",
   methods: ["GET", "POST", "PATCH", "DELETE"],
 });
 
@@ -32,7 +33,7 @@ app.post("/create-payment", async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
-      currency: "usd",
+      currency: "inr",
       payment_method_types: ["card"],
     });
     res.status(200).json(paymentIntent);
